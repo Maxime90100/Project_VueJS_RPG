@@ -1,0 +1,148 @@
+<template>
+  <div class="card">
+    <h2>{{ formName }}</h2>
+    <span v-if="extend"><v-btn x-small dark v-on:click="show">&lt; hide</v-btn></span>
+    <span v-else><v-btn x-small v-on:click="show">&gt; show</v-btn></span>
+
+    <hr>
+    <div v-if="extend">
+      <div v-for="(tf,index) in textFields" :key="'Form-textField-'+index">
+        <h3>
+          {{tf.name}}
+          <b v-if="tf.required">*</b>
+        </h3>
+        <div v-if="tf.type === 'add'" class="item">
+          <div v-for="(item,i) in tf.components" :key="'Form-textField-item-'+i">
+            <h5>{{item.name}}</h5>
+            <input :name="item.name" :type="item.type" :min="item.min" :max="item.max" :value="item.value" :class="'required-'+item.required">
+          </div>
+          <v-btn small rounded v-on:click="add(tf,index)">+Add</v-btn>
+          <ul>
+            <li v-for="(item,i) in addItems" :key="'Form-textField-list-item-'+i">
+              {{item}}
+              <v-btn x-small dark v-on:click="supress(i)">Delete</v-btn>
+            </li>
+          </ul>
+        </div>
+        <span v-else>
+        <input :id="'id-'+index" :type="tf.type" :value="tf.value">
+      </span>
+      </div>
+      <v-btn small style="margin: 5px 0" v-on:click="sendData">{{ sendButton }}</v-btn>
+      <h6>Les champs marqués d'un * sont obligatoires</h6>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "FormView",
+  props:{
+    formName:String,
+    textFields:Array,
+    sendButton:String
+  },
+  data(){
+    return{
+      addItems:[],
+      extend:false
+    }
+  },
+  methods:{
+    show(){
+      this.extend = !this.extend
+    },
+    add(tf,index){
+      let object = {}
+      let check = true
+
+      tf.components.forEach(item=>{
+        const name = item.name
+        const input = document.getElementsByName(name)[0]
+        input.style.borderColor = "white"
+        let value = input.value
+        const required = input.classList.contains('required-true')
+
+        if(!value){
+          value = null
+          if(required){
+            check = false
+            input.style.borderColor = "red"
+          }
+        }
+
+        if(item.type === 'number' && (value<item.min || value>item.max)){
+          check = false
+          input.style.borderColor = "red"
+          alert(`"${name}" must be between ${item.min} and ${item.max}`)
+        }
+        object[name] = value
+      });
+
+      if(check){
+        object['_id'] = index
+        this.addItems.push(object)
+      }
+    },
+    supress(index){
+      this.addItems.splice(index,1)
+    },
+    sendData(){
+      let response = {}
+      let check = true
+
+      this.textFields.forEach((tf,index)=>{
+        let value
+
+        if(tf.type !== 'add'){
+          value = document.getElementById(`id-${index}`).value
+          if(tf.required === true && !value){
+            check = false
+            alert(`"${tf.name}" is required`)
+          }
+        }
+
+        else{
+          value = this.addItems.filter(item=>item._id === index)
+          if(value.length > 0) delete value[0]._id
+          if(tf.required === true && value.length === 0){
+            check = false
+            alert(`"${tf.name}" is required`)
+          }
+        }
+
+        response[tf.name] = value
+      })
+
+      if(check) this.$emit('sendData',response)
+    }
+  }
+}
+</script>
+
+<style scoped>
+input{
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 100%;
+  height: 30px;
+}
+div{
+  text-align: left;
+}
+.item{
+  padding: 5px 20px 10px 20px;
+  background-color: #4b6986;
+  border-radius: 10px;
+}
+.item > div{
+  margin-bottom: 5px;
+}
+.result{
+  background-color: #202d3a;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px 0;
+}
+</style>
