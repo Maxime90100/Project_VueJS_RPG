@@ -31,7 +31,7 @@
 <script>
 import {mapState, mapMutations} from 'vuex'
 export default {
-  name: 'ErrorDialog',
+  name: 'ErrorDialogComponent',
   props: {
     title: String,
     width: String,

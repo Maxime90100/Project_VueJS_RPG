@@ -2,10 +2,10 @@
   <div id="app">
     <v-app>
 
-      <ErrorDialog
+      <ErrorDialogComponent
           title="Error"
           width="500"
-      ></ErrorDialog>
+      ></ErrorDialogComponent>
 
       <v-app-bar
           app
@@ -29,12 +29,12 @@
 </template>
 
 <script>
-import ErrorDialog from "@/components/ErrorDialog.vue";
+import ErrorDialogComponent from "@/components/error.dialog.component.vue";
 
 export default {
   name: 'App',
   components:{
-    ErrorDialog
+    ErrorDialogComponent
   },
   data: () => ({
     index:-1,

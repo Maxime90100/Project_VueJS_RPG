@@ -2,15 +2,15 @@
   <div>
     <h1>Teams</h1><hr>
     <router-view name="currentTeam"></router-view>
-    <List
+    <ListComponent
         listName="Teams"
         :data="teams"
         :attributes="['_id','name','nbAffiliations']"
         :filters="['_id','name']"
         @loadData="getTeamsFromAPI"
     >
-    </List>
-    <Form
+    </ListComponent>
+    <FormComponent
         formName="Sélectionner une Team"
         :text-fields="[
           {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true}
@@ -18,8 +18,8 @@
         send-button="Obtenir"
         @sendData="selectTeam"
     >
-    </Form>
-    <Form
+    </FormComponent>
+    <FormComponent
         formName="Créer une Team"
         :text-fields="[
               {name:'name',type:'text',required:true}
@@ -27,8 +27,8 @@
         send-button="Créer"
         @sendData="create"
     >
-    </Form>
-    <Form
+    </FormComponent>
+    <FormComponent
         formName="Ajouter des membres"
         :text-fields="[
               {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true},
@@ -39,8 +39,8 @@
         send-button="Ajouter"
         @sendData="addHeroesToTeam"
     >
-    </Form>
-    <Form
+    </FormComponent>
+    <FormComponent
         formName="Supprimer des membres"
         :text-fields="[
               {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true},
@@ -51,19 +51,19 @@
         send-button="Supprimer"
         @sendData="removeHeroesFromTeam"
     >
-    </Form>
+    </FormComponent>
   </div>
 </template>
 
 <script>
-import List from "@/components/List.vue";
-import Form from "@/components/Form.vue";
+import ListComponent from "@/components/list.component.vue";
+import FormComponent from "@/components/form.component.vue";
 import {mapActions, mapState} from "vuex";
 export default {
   name: "TeamView",
   components: {
-    List,
-    Form
+    ListComponent,
+    FormComponent
   },
   computed:{
     ...mapState('teams',['teams','currentTeam']),

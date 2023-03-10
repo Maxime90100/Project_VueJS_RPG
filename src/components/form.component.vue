@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: "FormView",
+  name: "FormComponent",
   props:{
     formName:String,
     textFields:Array,

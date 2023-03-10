@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: 'ListView',
+  name: 'ListComponent',
   props:{
     listName:String,
     data:Array,

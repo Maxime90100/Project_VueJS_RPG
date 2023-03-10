@@ -2,15 +2,15 @@
   <div>
     <h1>Organisations</h1><hr>
     <router-view name="currentOrg"></router-view>
-    <List
+    <ListComponent
         listName="Organisations"
         :data="orgs"
         :attributes="['_id','name']"
         :filters="['_id','name']"
         @loadData="getOrgsFromAPI"
     >
-    </List>
-    <Form
+    </ListComponent>
+    <FormComponent
         formName="Sélectionner une Organisation"
         :text-fields="[
           {name:'idOrg',type:'text',value:currentOrg ? currentOrg._id : null,required:true}
@@ -18,8 +18,8 @@
         send-button="Obtenir"
         @sendData="selectOrg"
     >
-    </Form>
-    <Form
+    </FormComponent>
+    <FormComponent
         formName="Créer une Organisation"
         :text-fields="[
               {name:'name',type:'text',required:true},
@@ -28,8 +28,8 @@
         send-button="Créer"
         @sendData="create"
     >
-    </Form>
-    <Form
+    </FormComponent>
+    <FormComponent
         formName="Ajouter une Team"
         :text-fields="[
               {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true},
@@ -38,8 +38,8 @@
         send-button="Ajouter"
         @sendData="addTeamToOrg"
     >
-    </Form>
-    <Form
+    </FormComponent>
+    <FormComponent
         formName="Supprimer une Team"
         :text-fields="[
               {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true},
@@ -48,20 +48,20 @@
         send-button="Supprimer"
         @sendData="removeTeamFromOrg"
     >
-    </Form>
+    </FormComponent>
   </div>
 </template>
 
 <script>
-import List from "@/components/List.vue";
-import Form from "@/components/Form.vue";
+import ListComponent from "@/components/list.component.vue";
+import FormComponent from "@/components/form.component.vue";
 import {mapActions, mapState} from "vuex";
 
 export default {
   name: "OrgView",
   components: {
-    List,
-    Form
+    ListComponent,
+    FormComponent
   },
   computed:{
     ...mapState('orgs',['orgs','currentOrg']),

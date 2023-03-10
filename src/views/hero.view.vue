@@ -2,15 +2,15 @@
   <div>
     <h1>Héros</h1><hr>
     <router-view name="currentHero"></router-view>
-    <List
+    <ListComponent
         listName="Héros"
         :data="heroes"
         :attributes="['_id', 'publicName']"
         :filters="['_id', 'publicName']"
         @loadData="getHeroesFromAPI"
     >
-    </List>
-    <Form
+    </ListComponent>
+    <FormComponent
         formName="Sélectionner un héro"
         :text-fields="[
           {name:'idHero',type:'text',value:currentHero ? currentHero._id : null,required:true},
@@ -19,8 +19,8 @@
         send-button="Obtenir"
         @sendData="selectHero"
     >
-    </Form>
-    <Form
+    </FormComponent>
+    <FormComponent
         formName="Créer un héro"
         :text-fields="[
               {name:'publicName',type:'text',required:true},
@@ -34,8 +34,8 @@
         send-button="Créer"
         @sendData="create"
     >
-    </Form>
-    <Form
+    </FormComponent>
+    <FormComponent
         formName="Modifier un héro"
         :text-fields="[
               {name:'_id',type:'text',value:currentHero ? currentHero._id : null,required:true},
@@ -51,20 +51,20 @@
         send-button="Modifier"
         @sendData="updateHero"
     >
-    </Form>
+    </FormComponent>
   </div>
 </template>
 
 <script>
-import List from "@/components/List.vue";
-import Form from "@/components/Form.vue";
+import ListComponent from "@/components/list.component.vue";
+import FormComponent from "@/components/form.component.vue";
 import {mapActions, mapState} from "vuex";
 
 export default {
   name: "HeroView",
   components: {
-    List,
-    Form
+    ListComponent,
+    FormComponent
   },
   computed:{
     ...mapState('heroes',['heroes','currentHero']),
