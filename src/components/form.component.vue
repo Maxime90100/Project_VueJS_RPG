@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import {mapMutations} from "vuex";
+
 export default {
   name: "FormComponent",
   props:{
@@ -49,6 +51,7 @@ export default {
     }
   },
   methods:{
+    ...mapMutations('events',['pushEvent']),
     show(){
       this.extend = !this.extend
     },
@@ -90,6 +93,7 @@ export default {
     sendData(){
       let response = {}
       let check = true
+      let emptyInputs = []
 
       this.textFields.forEach((tf,index)=>{
         let value
@@ -98,7 +102,7 @@ export default {
           value = document.getElementById(`id-${index}`).value
           if(tf.required === true && !value){
             check = false
-            alert(`"${tf.name}" is required`)
+            emptyInputs.push(tf.name)
           }
         }
 
@@ -107,7 +111,7 @@ export default {
           if(value.length > 0) delete value[0]._id
           if(tf.required === true && value.length === 0){
             check = false
-            alert(`"${tf.name}" is required`)
+            emptyInputs.push(tf.name)
           }
         }
 
@@ -115,6 +119,7 @@ export default {
       })
 
       if(check) this.$emit('sendData',response)
+      else this.pushEvent({message:`"${emptyInputs.toString()}" required`,cancellable:false})
     }
   }
 }

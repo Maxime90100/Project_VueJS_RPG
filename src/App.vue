@@ -7,6 +7,15 @@
           width="500"
       ></ErrorDialogComponent>
 
+      <EventDialogComponent
+          title="Message"
+          :text="eventMessage"
+          :show="isEvent"
+          :cancellable="eventCancellable"
+          width="500"
+          @closeDialog="closeDialog"
+      ></EventDialogComponent>
+
       <v-app-bar
           app
           dark
@@ -30,11 +39,16 @@
 
 <script>
 import ErrorDialogComponent from "@/components/error.dialog.component.vue";
-
+import EventDialogComponent from "@/components/event.dialog.component.vue";
+import {mapMutations, mapState} from "vuex";
 export default {
   name: 'App',
   components:{
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    EventDialogComponent
+  },
+  computed:{
+    ...mapState('events',['isEvent','eventMessage','eventCancellable'])
   },
   data: () => ({
     index:-1,
@@ -46,8 +60,13 @@ export default {
     ]
   }),
   methods: {
+    ...mapMutations('events',['popEvent']),
     goTo(path) {
       this.$router.push(path)
+    },
+    closeDialog(bool){
+      this.popEvent()
+      alert(bool)
     }
   },
   mounted() {

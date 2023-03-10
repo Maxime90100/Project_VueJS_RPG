@@ -18,10 +18,6 @@ export default {
     },
     actions: {
         async login({commit}, credentials) {
-            /*
-            Normally, this check should be done remotely.
-            Simulate the answer delay with setTimeout()
-             */
             await new Promise( resolve => {
                 setTimeout(resolve, 1000)
             })

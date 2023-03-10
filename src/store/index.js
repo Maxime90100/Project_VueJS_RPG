@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import errors from "@/store/error.module";
+import events from "@/store/event.dialog.module";
+import errors from "@/store/error.dialog.module";
 import auth from "@/store/auth.module";
 
 import orgs from "@/store/org.module";
@@ -30,7 +31,7 @@ export default new Vuex.Store({
   },
   modules: {
     orgs, teams, heroes,
-    errors,
+    events, errors,
     auth
   }
 })
