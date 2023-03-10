@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import HeroView from "@/views/HeroView.vue";
-import TeamView from "@/views/TeamView.vue";
-import OrgView from "@/views/OrgView.vue";
-import CurrentOrgView from "@/views/CurrentOrgView.vue";
-import CurrentTeamView from "@/views/CurrentTeamView.vue";
-import CurrentHeroView from "@/views/CurrentHeroView.vue";
+import HeroView from "@/views/hero.view.vue";
+import TeamView from "@/views/team.view.vue";
+import OrgView from "@/views/org.view.vue";
+import CurrentOrgView from "@/views/org_current.view.vue";
+import CurrentTeamView from "@/views/team_current.view.vue";
+import CurrentHeroView from "@/views/hero_current.view.vue";
 import AuthenticationView from "@/views/AuthenticationView.vue";
 
 Vue.use(VueRouter)

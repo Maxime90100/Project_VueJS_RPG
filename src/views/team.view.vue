@@ -66,10 +66,11 @@ export default {
     Form
   },
   computed:{
-    ...mapState(['teams','currentTeam','currentHero'])
+    ...mapState('teams',['teams','currentTeam']),
+    ...mapState('heroes',['currentHero'])
   },
   methods:{
-    ...mapActions([
+    ...mapActions('teams',[
         'getTeamsFromAPI',
         'createTeam',
         'addHeroesToTeam',

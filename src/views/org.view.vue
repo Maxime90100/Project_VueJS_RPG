@@ -64,10 +64,11 @@ export default {
     Form
   },
   computed:{
-    ...mapState(['orgs','currentOrg','currentTeam'])
+    ...mapState('orgs',['orgs','currentOrg']),
+    ...mapState('teams',['currentTeam'])
   },
   methods:{
-    ...mapActions([
+    ...mapActions('orgs',[
         'getOrgsFromAPI',
         'createOrg',
         'addTeamToOrg',

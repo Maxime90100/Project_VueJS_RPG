@@ -15,7 +15,7 @@ import {mapState} from "vuex";
 export default {
   name: "CurrentTeamView",
   computed:{
-    ...mapState(['currentTeam'])
+    ...mapState('teams',['currentTeam'])
   },
   methods:{
     unselect(){

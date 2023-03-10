@@ -27,7 +27,7 @@ import {mapState} from "vuex";
 export default {
   name: "CurrentOrgView",
   computed:{
-    ...mapState(['currentOrg'])
+    ...mapState('orgs',['currentOrg'])
   },
   methods:{
     unselect(){

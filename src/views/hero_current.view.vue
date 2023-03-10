@@ -19,7 +19,7 @@ import {mapState} from "vuex";
 export default {
   name: "CurrentHeroView",
   computed: {
-    ...mapState(['currentHero'])
+    ...mapState('heroes',['currentHero'])
   },
   methods: {
     unselect() {

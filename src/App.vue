@@ -1,6 +1,12 @@
 <template>
   <div id="app">
     <v-app>
+
+      <ErrorDialog
+          title="Error"
+          width="500"
+      ></ErrorDialog>
+
       <v-app-bar
           app
           dark
@@ -23,8 +29,13 @@
 </template>
 
 <script>
+import ErrorDialog from "@/components/ErrorDialog.vue";
+
 export default {
   name: 'App',
+  components:{
+    ErrorDialog
+  },
   data: () => ({
     index:-1,
     btns:[

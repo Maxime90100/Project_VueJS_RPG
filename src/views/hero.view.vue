@@ -67,7 +67,8 @@ export default {
     Form
   },
   computed:{
-    ...mapState(['heroes','currentHero','currentOrg'])
+    ...mapState('heroes',['heroes','currentHero']),
+    ...mapState('orgs',['currentOrg'])
   },
   data(){
     return{
@@ -75,7 +76,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions([
+    ...mapActions('heroes',[
         'getHeroesFromAPI',
         'createHero',
         'updateHero',
