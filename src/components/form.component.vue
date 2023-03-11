@@ -119,7 +119,7 @@ export default {
       })
 
       if(check) this.$emit('sendData',response)
-      else this.pushEvent({message:`"${emptyInputs.toString()}" required`,cancellable:false})
+      else this.pushEvent({message:`"${emptyInputs.toString()}" required`})
     }
   }
 }

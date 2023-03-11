@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   name: "CurrentHeroView",
@@ -22,8 +22,9 @@ export default {
     ...mapState('heroes',['currentHero'])
   },
   methods: {
+    ...mapMutations('heroes',['setCurrentHero']),
     unselect() {
-      this.$store.commit('setCurrentHero', null)
+      this.setCurrentHero(null)
       this.$router.push('/heroes')
     }
   }

@@ -13,7 +13,7 @@ export default {
     mutations: {
         pushEvent(state, event){
             state.eventMessage = event.message
-            state.eventCancellable = event.cancellable
+            state.eventCancellable = event.cancellable ? event.cancellable : false
             state.isEvent = true
         },
         popEvent(state) {

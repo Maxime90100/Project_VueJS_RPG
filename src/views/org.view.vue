@@ -32,8 +32,7 @@
     <FormComponent
         formName="Ajouter une Team"
         :text-fields="[
-              {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true},
-              {name:'secret',type:'text',value:currentOrg ? currentOrg.secret : null,required:true}
+              {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true}
           ]"
         send-button="Ajouter"
         @sendData="addTeamToOrg"
@@ -42,8 +41,7 @@
     <FormComponent
         formName="Supprimer une Team"
         :text-fields="[
-              {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true},
-              {name:'secret',type:'text',value:currentOrg ? currentOrg.secret : null,required:true}
+              {name:'idTeam',type:'text',value:currentTeam ? currentTeam._id : null,required:true}
           ]"
         send-button="Supprimer"
         @sendData="removeTeamFromOrg"

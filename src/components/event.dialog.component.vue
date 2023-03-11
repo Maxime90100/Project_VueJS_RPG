@@ -16,6 +16,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
+            dark
             color="green darken-1"
             @click="$emit('closeDialog', true)"
         >
@@ -23,6 +24,7 @@
         </v-btn>
         <v-btn
             v-if="cancellable"
+            dark
             color="warning"
             @click="$emit('closeDialog', false)"
         >

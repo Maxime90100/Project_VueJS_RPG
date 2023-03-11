@@ -13,8 +13,7 @@
     <FormComponent
         formName="Sélectionner un héro"
         :text-fields="[
-          {name:'idHero',type:'text',value:currentHero ? currentHero._id : null,required:true},
-          {name:'secret',type:'text',value:currentOrg ? currentOrg.secret : null,required:true}
+          {name:'idHero',type:'text',value:currentHero ? currentHero._id : null,required:true}
       ]"
         send-button="Obtenir"
         @sendData="selectHero"
@@ -45,8 +44,7 @@
                   {name:'name',type:'text',required:true},
                   {name:'type',type:'number',min:1,max:7,required:true},
                   {name:'level',type:'number',min:0,max:100,required:true}
-              ],required:false},
-              {name:'secret',type:'text',value:currentOrg ? currentOrg.secret : null,required:true},
+              ],required:false}
           ]"
         send-button="Modifier"
         @sendData="updateHero"

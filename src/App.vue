@@ -27,7 +27,10 @@
             </td>
           </tr>
         </table>
-        {{$store.state.password}}
+
+        <span v-if="password">
+          SECRET: {{password}}
+        </span>
       </v-app-bar>
 
       <v-main>
@@ -48,7 +51,8 @@ export default {
     EventDialogComponent
   },
   computed:{
-    ...mapState('events',['isEvent','eventMessage','eventCancellable'])
+    ...mapState('events',['isEvent','eventMessage','eventCancellable']),
+    ...mapState('auth',['password'])
   },
   data: () => ({
     index:-1,
@@ -66,7 +70,9 @@ export default {
     },
     closeDialog(bool){
       this.popEvent()
-      alert(bool)
+      if(!bool){
+        //TODO
+      }
     }
   },
   mounted() {

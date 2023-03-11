@@ -13,18 +13,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    message:null,
-    password:null
+
   },
   getters: {
+
   },
   mutations: {
-    setMessage(state, message){
-      state.message = message
-    },
-    setPassword(state, passord){
-      state.password = passord
-    }
+
   },
   actions: {
 

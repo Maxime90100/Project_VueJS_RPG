@@ -7,7 +7,8 @@ import OrgView from "@/views/org.view.vue";
 import CurrentOrgView from "@/views/org_current.view.vue";
 import CurrentTeamView from "@/views/team_current.view.vue";
 import CurrentHeroView from "@/views/hero_current.view.vue";
-import AuthenticationView from "@/views/AuthenticationView.vue";
+import AuthenticationView from "@/views/auth.view.vue";
+import store from "@/store"
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,7 @@ const routes = [
     {
         path: '/heroes',
         name: 'heroes',
+        access:1,
         components:{
             central: HeroView
         },
@@ -45,6 +47,7 @@ const routes = [
     {
         path: '/orgs',
         name: 'orgs',
+        access:1,
         components: {
             central: OrgView
         },
@@ -63,6 +66,10 @@ const routes = [
         components: {
             central: AuthenticationView
         },
+    },
+    {
+        path:'*',
+        name:'error404'
     }
 ]
 
@@ -71,5 +78,27 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+
+function checkAccess(to) {
+    for (let i=0;i<routes.length;i++) {
+        if (routes[i].path === to.path)
+            return !((routes[i].access) && (routes[i].access === 1) && !(store.state.auth.password));
+    }
+    return true
+}
+
+router.beforeEach((to, from, next) => {
+    if (to.name === 'error404') {
+        store.commit('errors/pushError','Invalid route', {root: true})
+        next('/')
+    }
+    else if (checkAccess(to)) {
+        next()
+    }
+    else {
+        store.commit('errors/pushError','You need to login', {root: true})
+        next('/auth');
+    }
+});
 
 export default router

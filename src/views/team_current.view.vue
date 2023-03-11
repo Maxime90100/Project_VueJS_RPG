@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   name: "CurrentTeamView",
@@ -18,8 +18,9 @@ export default {
     ...mapState('teams',['currentTeam'])
   },
   methods:{
+    ...mapMutations('teams',['setCurrentTeam']),
     unselect(){
-      this.$store.commit('setCurrentTeam',null)
+      this.setCurrentTeam(null)
       this.$router.push('/teams')
     }
   }

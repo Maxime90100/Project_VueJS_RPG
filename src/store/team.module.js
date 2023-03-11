@@ -31,7 +31,7 @@ export default {
             await createTeam(data.name)
                 .then(res=>{
                     if(res.error) commit('errors/pushError',res.data,{root:true})
-                    else commit('setMessage',res.data,{root:true})
+                    else commit('events/pushEvent',{message:res.data},{root:true})
                 })
         },
         async addHeroesToTeam({commit},data){
@@ -40,7 +40,7 @@ export default {
             await addHeroesToTeam(idHeroes,data.idTeam)
                 .then(res=>{
                     if(res.error) commit('errors/pushError',res.data,{root:true})
-                    else commit('setMessage',res.data,{root:true})
+                    else commit('events/pushEvent',{message:res.data},{root:true})
                 })
         },
         async removeHeroesFromTeam({commit},data){
@@ -49,7 +49,7 @@ export default {
             await removeHeroesFromTeam(idHeroes,data.idTeam)
                 .then(res=>{
                     if(res.error) commit('errors/pushError',res.data,{root:true})
-                    else commit('setMessage',res.data,{root:true})
+                    else commit('events/pushEvent',{message:res.data},{root:true})
                 })
         },
         async getTeamById({commit},data){
@@ -58,7 +58,7 @@ export default {
                     if(res.error) commit('errors/pushError',res.data,{root:true})
                     else{
                         commit('setCurrentTeam',res.data)
-                        commit('setMessage','Current Team has been defined !',{root:true})
+                        commit('events/pushEvent',{message:'Current Team has been defined !'},{root:true})
                     }
                 })
         }

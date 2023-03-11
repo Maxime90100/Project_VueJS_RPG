@@ -1,13 +1,18 @@
 import axios from 'axios'
+import store from '@/store'
 
 // create a special axiosAgent agent that works with the apidemo API
 const axiosAgent = axios.create({
-  baseURL: ' https://apidemo.iut-bm.univ-fcomte.fr/herocorp'
+  baseURL: ' https://apidemo.iut-bm.univ-fcomte.fr'
 });
 
 axiosAgent.interceptors.request.use(
     config => {
-      return { ...config, headers: { 'app-key': 'ceci est la clef secret'} }
+      return { ...config, headers: {
+          'app-key': 'ceci est la clef secret',
+          'org-secret': store.state.auth.password
+        }
+      }
     },
     error => {
       return Promise.reject(error)

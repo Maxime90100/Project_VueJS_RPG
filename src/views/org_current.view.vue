@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   name: "CurrentOrgView",
@@ -30,8 +30,9 @@ export default {
     ...mapState('orgs',['currentOrg'])
   },
   methods:{
+    ...mapMutations('orgs',['setCurrentOrg']),
     unselect(){
-      this.$store.commit('setCurrentOrg',null)
+      this.setCurrentOrg(null)
       this.$router.push('/orgs')
     }
   }
