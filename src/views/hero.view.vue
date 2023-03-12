@@ -38,8 +38,8 @@
         formName="Modifier un héro"
         :text-fields="[
               {name:'_id',type:'text',value:currentHero ? currentHero._id : null,required:true},
-              {name:'publicName',type:'text',required:false},
-              {name:'realName',type:'text',required:false},
+              {name:'publicName',type:'text',required:true},
+              {name:'realName',type:'text',required:true},
               {name:'powers',type:'add',components:[
                   {name:'name',type:'text',required:true},
                   {name:'type',type:'number',min:1,max:7,required:true},

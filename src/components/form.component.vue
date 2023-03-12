@@ -14,7 +14,7 @@
         <div v-if="tf.type === 'add'" class="item">
           <div v-for="(item,i) in tf.components" :key="'Form-textField-item-'+i">
             <h5>{{item.name}}</h5>
-            <input :name="item.name" :type="item.type" :min="item.min" :max="item.max" :value="item.value" :class="'required-'+item.required">
+            <input :id="formName+'-item-'+item.name" :name="item.name" :type="item.type" :min="item.min" :max="item.max" :value="item.value" :class="'required-'+item.required">
           </div>
           <v-btn small rounded v-on:click="add(tf,index)">+Add</v-btn>
           <ul>
@@ -25,7 +25,7 @@
           </ul>
         </div>
         <span v-else>
-        <input :id="'id-'+index" :type="tf.type" :value="tf.value">
+        <input :id="formName+'-id-'+index" :type="tf.type" :value="tf.value">
       </span>
       </div>
       <v-btn small style="margin: 5px 0" v-on:click="sendData">{{ sendButton }}</v-btn>
@@ -61,7 +61,7 @@ export default {
 
       tf.components.forEach(item=>{
         const name = item.name
-        const input = document.getElementsByName(name)[0]
+        const input = document.getElementById(this.formName+'-item-'+item.name)
         input.style.borderColor = "white"
         let value = input.value
         const required = input.classList.contains('required-true')
@@ -77,7 +77,7 @@ export default {
         if(item.type === 'number' && (value<item.min || value>item.max)){
           check = false
           input.style.borderColor = "red"
-          alert(`"${name}" must be between ${item.min} and ${item.max}`)
+          this.pushEvent({message:`"${name}" must be between ${item.min} and ${item.max}`})
         }
         object[name] = value
       });
@@ -99,7 +99,7 @@ export default {
         let value
 
         if(tf.type !== 'add'){
-          value = document.getElementById(`id-${index}`).value
+          value = document.getElementById(`${this.formName}-id-${index}`).value
           if(tf.required === true && !value){
             check = false
             emptyInputs.push(tf.name)
@@ -119,7 +119,7 @@ export default {
       })
 
       if(check) this.$emit('sendData',response)
-      else this.pushEvent({message:`"${emptyInputs.toString()}" required`})
+      else this.pushEvent({message:`"${emptyInputs.toString()}" required !`})
     }
   }
 }
@@ -143,11 +143,5 @@ div{
 }
 .item > div{
   margin-bottom: 5px;
-}
-.result{
-  background-color: #202d3a;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 10px 0;
 }
 </style>

@@ -10,7 +10,8 @@ axiosAgent.interceptors.request.use(
     config => {
       return { ...config, headers: {
           'app-key': 'ceci est la clef secret',
-          'org-secret': store.state.auth.password
+          'org-secret': store.state.auth.password,
+          'x-xsrf-token':store.state.auth.login?store.state.auth.login.xsrfToken : null
         }
       }
     },

@@ -33,7 +33,7 @@ async function updateHero(id,publicName,realName,powers) {
 }
 
 async function getHeroById(id){
-    let res = await getRequest(`/herocorp/heroes/getbyid/${id}}`, 'HERO:getHeroById')
+    let res = await getRequest(`/herocorp/heroes/getbyid/${id}`, 'HERO:getHeroById')
     if(res.error!==0) return {error:res.data.error,status:res.data.status,data:res.data.data}
     else return {error:0,status:200,data:res.data[0]}
 }

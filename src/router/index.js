@@ -14,6 +14,10 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        path:'/',
+        name:'home'
+    },
+    {
         path: '/heroes',
         name: 'heroes',
         access:1,
@@ -96,7 +100,7 @@ router.beforeEach((to, from, next) => {
         next()
     }
     else {
-        store.commit('errors/pushError','You need to login', {root: true})
+        store.commit('errors/pushError','You need secret password !', {root: true})
         next('/auth');
     }
 });
